@@ -3,95 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mente Jovem - Apoio Psicológico Escolar</title>
+  <title>EmoTeen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header {
-      background-color: #3b82f6;
-      color: white;
-      padding: 16px 24px;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background-color: #29293d;
+      padding: 20px 30px;
+      border-bottom: 2px solid #00ffe1;
     }
 
     .logo {
       font-size: 1.8em;
       font-weight: bold;
+      color: #00ffe1;
     }
 
-    nav a {
-      color: white;
+    .login-btn {
+      color: #fff;
       text-decoration: none;
-      margin-left: 20px;
-      padding: 8px 14px;
-      background-color: #2563eb;
-      border-radius: 4px;
-      transition: background-color 0.2s;
+      padding: 8px 18px;
+      border: 2px solid #00ffe1;
+      border-radius: 8px;
+      transition: background-color 0.3s;
     }
 
-    nav a:hover {
-      background-color: #1e40af;
+    .login-btn:hover {
+      background-color: #00ffe1;
+      color: #1e1e2f;
     }
 
     main {
-      padding: 60px 20px;
       text-align: center;
       max-width: 800px;
-      margin: auto;
+      padding: 60px 20px 30px;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: #111827;
+      font-size: 2.6em;
+      color: #00ffe1;
+      margin-bottom: 10px;
     }
 
-    p {
-      font-size: 1.2em;
-      color: #374151;
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-size: 1.8em;
+      color: #00ffe1;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      font-size: 1.1em;
+      color: #d1d1d1;
       line-height: 1.6em;
     }
 
+    .register-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 1.1em;
+      color: #1e1e2f;
+      background-color: #00ffe1;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .register-btn:hover {
+      background-color: #00c9b7;
+    }
+
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 1000;
+    }
+
     footer {
+      width: 100%;
       text-align: center;
       padding: 20px;
-      color: #888;
       font-size: 0.9em;
+      color: #888;
+      background-color: #1e1e2f;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">Mente Jovem</div>
-    <nav>
-      <a href="login.html">Login</a>
-      <a href="register.html">Cadastro</a>
-    </nav>
+    <div class="logo">EmoTeen</div>
+    <a class="login-btn" href="login.html">Login</a>
   </header>
 
   <main>
-    <h1>Quem Somos</h1>
-    <p>
-      O <strong>Mente Jovem</strong> é uma plataforma de apoio psicológico pensada especialmente para alunos do ensino fundamental e médio.
-      Nosso objetivo é identificar, acolher e orientar jovens que estejam passando por desafios emocionais, como ansiedade, depressão, estresse escolar ou falta de motivação.
-    </p>
+    <div class="section">
+      <h2>🧠 Quem Somos</h2>
+      <p>
+        A <strong>EmoTeen</strong> é uma plataforma moderna de apoio emocional para adolescentes. Criada para oferecer acolhimento, escuta ativa e tecnologia emocional nas escolas e fora delas.
+      </p>
+    </div>
 
-    <h1>O Que Fazemos</h1>
-    <p>
-      Trabalhamos junto às escolas para oferecer triagens emocionais rápidas, atendimento psicológico remoto com profissionais qualificados e um ambiente digital seguro.
-      Através de testes interativos, sessões online e acompanhamento humanizado, ajudamos a transformar a vida de milhares de jovens, tornando o ambiente escolar mais saudável.
-    </p>
+    <div class="section">
+      <h2>✨ O Que Fazemos</h2>
+      <p>
+        Oferecemos triagens emocionais com inteligência artificial, sessões de atendimento psicológico remoto, classificação de estado emocional por cores (verde, amarelo, vermelho) e conteúdos interativos que ajudam jovens a entenderem e lidarem com suas emoções.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>🎯 Nosso Propósito</h2>
+      <p>
+        Cuidar da saúde mental da nova geração com empatia, inovação e responsabilidade. Nosso objetivo é detectar sinais emocionais precoces e ajudar cada adolescente a encontrar equilíbrio emocional no seu próprio tempo.
+      </p>
+    </div>
+
+    <a href="register.html" class="register-btn">Quero Me Cadastrar</a>
   </main>
 
+  <a href="https://wa.me/seunumerodowhatsapp" class="whatsapp-btn" title="Fale conosco no WhatsApp">
+    🟢
+  </a>
+
   <footer>
-    © 2025 Mente Jovem — Todos os direitos reservados.
+    © 2025 EmoTeen — Cuidando da sua mente com tecnologia e coração.
   </footer>
 
 </body>
