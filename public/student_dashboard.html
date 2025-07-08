@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente Jovem - Painel do Aluno</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Painel do Aluno - Mente Jovem</h1>
+        <button onclick="auth.signOut().then(() => window.location.href='login.html')">Sair</button>
+        <h2>Seu Último Resultado</h2>
+        <p id="lastResult"></p>
+        <p id="resultEmoji"></p>
+        <button onclick="window.location.href='https://calendly.com/mente-jovem/profissional'">Agendar Sessão</button>
+        <h2>Histórico de Resultados</h2>
+        <div id="results"></div>
+        <button onclick="window.location.href='quiz.html'">Refazer o Quiz</button>
+    </div>
+    <script type="module">
+        import { auth, db } from './script.js';
+        import { collection, query, where, orderBy, limit, getDocs } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js';
+
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+            } else {
+                loadLastResult(user.uid);
+                loadResults(user.uid);
+            }
+        });
+
+        async function loadLastResult(userId) {
+            const lastResult = document.getElementById('lastResult');
+            const resultEmoji = document.getElementById('resultEmoji');
+            const q = query(collection(db, 'quizResults'), where('userId', '==', userId), orderBy('timestamp', 'desc'), limit(1));
+            const snapshot = await getDocs(q);
+            if (!snapshot.empty) {
+                const data = snapshot.docs[0].data();
+                let message = '';
+                let emoji = '';
+                if (data.classification === 'Verde') {
+                    message = 'Você está se saindo bem, e isso é ótimo. Mas todo mundo precisa de apoio de vez em quando. 💚';
+                    emoji = '😃';
+                } else if (data.classification === 'Amarelo') {
+                    message = 'Percebemos que talvez algo esteja pedindo atenção dentro de você. Isso não significa que você está fraco, significa que você é humano. 💛';
+                    emoji = '😐';
+                }
+                lastResult.innerHTML = `${message}<br>Pontuação: ${data.score} (${data.classification})`;
+                resultEmoji.innerHTML = emoji;
+            } else {
+                lastResult.innerHTML = 'Nenhum resultado encontrado. Faça o quiz para começar!';
+            }
+        }
+
+        async function loadResults(userId) {
+            const resultsDiv = document.getElementById('results');
+            const q = query(collection(db, 'quizResults'), where('userId', '==', userId), orderBy('timestamp', 'desc'));
+            const snapshot = await getDocs(q);
+            resultsDiv.innerHTML = '';
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                resultsDiv.innerHTML += `
+                    <p>Pontuação: ${data.score}<br>Classificação: ${data.classification}<br>Data: ${new Date(data.timestamp).toLocaleString()}</p>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
