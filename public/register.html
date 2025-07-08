@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente Jovem - Cadastro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro - Mente Jovem</h1>
+        <p>Crie sua conta para começar a usar o Mente Jovem. 💚</p>
+        <form id="registerForm">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" required>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" required>
+            <label for="confirmPassword">Confirmar Senha:</label>
+            <input type="password" id="confirmPassword" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p>Já tem conta? <a href="login.html">Faça login</a></p>
+        <p id="errorMessage" style="color: red;"></p>
+        <p id="successMessage" style="color: green;"></p>
+    </div>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
