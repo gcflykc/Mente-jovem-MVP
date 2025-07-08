@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente Jovem - Quiz Emocional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Emocional - Mente Jovem</h1>
+        <p>🧡 Este é um espaço seguro. Responda com sinceridade. Não é uma prova, não tem certo ou errado. Isso nos ajuda a entender como você está se sentindo. ✅ Leva menos de 2 minutos.</p>
+        <form id="quizForm">
+            <div id="questions">
+                <!-- As perguntas serão inseridas dinamicamente via JavaScript -->
+            </div>
+            <button type="submit">Enviar Respostas</button>
+        </form>
+        <div id="result" style="display: none;">
+            <h2>Resultado</h2>
+            <p id="resultText"></p>
+            <p id="resultEmoji"></p>
+            <div id="actionButton"></div>
+            <button onclick="resetQuiz()">Refazer o Quiz</button>
+        </div>
+    </div>
+    <script type="module">
+        import { saveResultToFirebase } from './script.js';
+
+        const questions = [
+            "Você sente que está carregando algo pesado por dentro, mesmo sem saber explicar o motivo?",
+            "Já sentiu que ninguém entenderia se você contasse o que está passando?",
+            "Tem dificuldade para dormir ou dormir demais nos últimos dias?",
+            "Você tem chorado ou se sentido muito triste sem saber por quê?",
+            "Tem perdido o interesse em coisas que normalmente gosta de fazer?",
+            "Tem sentido seu coração acelerar ou ficar nervoso sem um motivo claro?",
+            "Já pensou em desaparecer ou que o mundo seria melhor sem você?",
+            "Você tem alguém com quem se sente seguro para conversar sobre seus sentimentos?",
+            "Está se sentindo sozinho, mesmo estando entre outras pessoas?",
+            "Está tudo bem de verdade com você… ou você apenas diz que está para não preocupar ninguém?"
+        ];
+
+        const quizForm = document.getElementById('quizForm');
+        const questionsDiv = document.getElementById('questions');
+        const resultDiv = document.getElementById('result');
+        const resultText = document.getElementById('resultText');
+        const resultEmoji = document.getElementById('resultEmoji');
+        const actionButton = document.getElementById('actionButton');
+
+        // Gera as perguntas dinamicamente
+        questions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `
+                <p>${index + 1}. ${question}</p>
+                <label><input type="radio" name="q${index}" value="1" required> 😃 Nunca</label>
+                <label><input type="radio" name="q${index}" value="2"> 😐 Raramente</label>
+                <label><input type="radio" name="q${index}" value="3"> 😶 Às vezes</label>
+                <label><input type="radio" name="q${index}" value="4"> 😟 Frequentemente</label>
+                <label><input type="radio" name="q${index}" value="5"> 😢 Quase sempre</label>
+            `;
+            questionsDiv.appendChild(questionDiv);
+        });
+
+        quizForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let score = 0;
+            let q7Score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    const value = parseInt(selected.value);
+                    score += value;
+                    if (i === 6) q7Score = value; // Pergunta 7
+                }
+            }
+
+            let result = '';
+            let emoji = '';
+            let action = '';
+            let classification = '';
+
+            if (q7Score >= 4) {
+                classification = 'Vermelho';
+                result = 'Você não está sozinho. Seu sentimento importa e queremos conversar com você agora. Vamos cuidar disso juntos. ❤️';
+                emoji = '😢';
+                action = `<a href="https://calendly.com/mente-jovem/terapeuta">Falar agora com alguém por vídeo</a><br><p>Se você estiver em risco imediato, também pode buscar ajuda com um adulto de confiança ou ligar para o 188 (CVV).</p>`;
+                await saveResultToFirebase(score, classification);
+                resultText.innerHTML = result;
+                resultEmoji.innerHTML = emoji;
+                actionButton.innerHTML = action;
+                resultDiv.style.display = 'block';
+                quizForm.style.display = 'none';
+            } else if (score <= 20) {
+                classification = 'Verde';
+                await saveResultToFirebase(score, classification);
+                window.location.href = 'student_dashboard.html';
+            } else if (score <= 34) {
+                classification = 'Amarelo';
+                await saveResultToFirebase(score, classification);
+                window.location.href = 'student_dashboard.html';
+            } else {
+                classification = 'Vermelho';
+                result = 'Você não está sozinho. Seu sentimento importa e queremos conversar com você agora. Vamos cuidar disso juntos. ❤️';
+                emoji = '😢';
+                action = `<a href="https://calendly.com/mente-jovem/terapeuta">Falar agora com alguém por vídeo</a><br><p>Se você estiver em risco imediato, também pode buscar ajuda com um adulto de confiança ou ligar para o 188 (CVV).</p>`;
+                await saveResultToFirebase(score, classification);
+                resultText.innerHTML = result;
+                resultEmoji.innerHTML = emoji;
+                actionButton.innerHTML = action;
+                resultDiv.style.display = 'block';
+                quizForm.style.display = 'none';
+            }
+        });
+
+        function resetQuiz() {
+            quizForm.reset();
+            resultDiv.style.display = 'none';
+            quizForm.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
