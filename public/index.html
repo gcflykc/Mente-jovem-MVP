@@ -1,18 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mente Jovem - Bem-vindo</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mente Jovem - Apoio Psicológico Escolar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #3b82f6;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      padding: 8px 14px;
+      background-color: #2563eb;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    nav a:hover {
+      background-color: #1e40af;
+    }
+
+    main {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #374151;
+      line-height: 1.6em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Mente Jovem</h1>
-        <p>Um espaço seguro para entender como você está se sentindo. 💚</p>
-        <p>Faça o quiz emocional e descubra mais sobre suas emoções em menos de 2 minutos.</p>
-        <button onclick="window.location.href='login.html'">Entrar</button>
-        <button onclick="window.location.href='quiz.html'">Fazer o Quiz</button>
-    </div>
+
+  <header>
+    <div class="logo">Mente Jovem</div>
+    <nav>
+      <a href="login.html">Login</a>
+      <a href="register.html">Cadastro</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Quem Somos</h1>
+    <p>
+      O <strong>Mente Jovem</strong> é uma plataforma de apoio psicológico pensada especialmente para alunos do ensino fundamental e médio.
+      Nosso objetivo é identificar, acolher e orientar jovens que estejam passando por desafios emocionais, como ansiedade, depressão, estresse escolar ou falta de motivação.
+    </p>
+
+    <h1>O Que Fazemos</h1>
+    <p>
+      Trabalhamos junto às escolas para oferecer triagens emocionais rápidas, atendimento psicológico remoto com profissionais qualificados e um ambiente digital seguro.
+      Através de testes interativos, sessões online e acompanhamento humanizado, ajudamos a transformar a vida de milhares de jovens, tornando o ambiente escolar mais saudável.
+    </p>
+  </main>
+
+  <footer>
+    © 2025 Mente Jovem — Todos os direitos reservados.
+  </footer>
+
 </body>
 </html>
